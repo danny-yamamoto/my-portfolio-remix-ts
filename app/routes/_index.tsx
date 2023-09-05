@@ -1,5 +1,6 @@
 import { useLoaderData, Outlet, Link } from "@remix-run/react"
 import type { V2_MetaFunction } from "@remix-run/cloudflare";
+import { getRepositories } from "../utils/repository.server";
 import { json } from "@remix-run/cloudflare"
 import stylesUrl from "../style/index.css"
 
@@ -20,12 +21,21 @@ export const links = () => {
 type CombinedJson = {
   myname: string;
   githubProfile: string;
+  displayRepositories: Repository;
 }
 
+type Repository = {
+  name: string;
+  description: string;
+  url: string;
+};
+
 export const loader = async () => {
+  const repositories = await getRepositories();
   const combinedJson = {
     myname: "Daisuke Yamamoto",
     githubProfile: "https://github.com/danny-yamamoto",
+    displayRepositories: repositories
   };
   return json(combinedJson);
 }
