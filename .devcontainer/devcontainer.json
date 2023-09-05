@@ -11,7 +11,8 @@
 				"jeremyrajan.webpack",
 				"mgmcdermott.vscode-language-babel",
 				"Orta.vscode-jest",
-				"amimaro.remix-run-snippets"
+				"amimaro.remix-run-snippets",
+				"rangav.vscode-thunder-client"
 			]
 		}
 	}
