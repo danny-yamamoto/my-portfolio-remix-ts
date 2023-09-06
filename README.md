@@ -20,3 +20,6 @@ Cloudflare Pages are currently only deployable through their Git provider integr
 If you don't already have an account, then [create a Cloudflare account here](https://dash.cloudflare.com/sign-up/pages) and after verifying your email address with Cloudflare, go to your dashboard and follow the [Cloudflare Pages deployment guide](https://developers.cloudflare.com/pages/framework-guides/deploy-anything).
 
 Configure the "Build command" should be set to `npm run build`, and the "Build output directory" should be set to `public`.
+
+## How to use Apollo Client with Remix
+- [How to](https://www.apollographql.com/blog/apollo-client/how-to-use-apollo-client-with-remix/)
