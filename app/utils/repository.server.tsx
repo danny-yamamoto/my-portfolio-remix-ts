@@ -12,6 +12,29 @@ export async function getRepositories() {
             url: '"https://github.com/danny-yamamoto/cosign-tutorial'
         }
     ]
-    return res;
+    console.log(res);
+
+    const queryData = {
+        query: `
+          query {
+            person(personID:5) {
+              name
+              birthYear
+              created
+            }
+          }
+        `
+    };
+    console.log(queryData);
+    const response = await fetch("https://swapi-graphql.netlify.app/.netlify/functions/index", {
+        body: JSON.stringify(queryData),
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+    });
+    const data = await response.json();
+    console.log(data);
+
+    //return res;
+    return data;
 }
 
