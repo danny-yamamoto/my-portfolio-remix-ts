@@ -41,8 +41,11 @@ export const loader = async () => {
 }
 
 export default function Index() {
+  console.log("==========");
   const data: CombinedJson = useLoaderData();
   console.log(data);
+  const repositories = data.displayRepositories;
+  console.log(repositories);
   return (
     <div>
       {/* Introduction Section */}
