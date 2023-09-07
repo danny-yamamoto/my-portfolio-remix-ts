@@ -3,6 +3,7 @@ import type { V2_MetaFunction } from "@remix-run/cloudflare";
 import { getRepositories } from "../utils/repository.server";
 import { json } from "@remix-run/cloudflare"
 import stylesUrl from "../style/index.css"
+import type { LoaderArgs } from "@remix-run/node";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -21,16 +22,12 @@ export const links = () => {
 type CombinedJson = {
   myname: string;
   githubProfile: string;
-  displayRepositories: Repository;
+  displayRepositories: any[];
 }
 
-type Repository = {
-  name: string;
-  description: string;
-  url: string;
-};
-
-export const loader = async () => {
+export const loader = async ({ context }: LoaderArgs) => {
+  console.log(process.env);
+  //console.log(context.env);
   const repositories = await getRepositories();
   const combinedJson = {
     myname: "Daisuke Yamamoto",
@@ -41,11 +38,8 @@ export const loader = async () => {
 }
 
 export default function Index() {
-  console.log("==========");
   const data: CombinedJson = useLoaderData();
-  console.log(data);
   const repositories = data.displayRepositories;
-  console.log(repositories);
   return (
     <div>
       {/* Introduction Section */}
@@ -53,6 +47,11 @@ export default function Index() {
         <h1>{data.myname}</h1>
         <Outlet />
         <p>Welcome to my portfolio</p>
+        <ul>
+          {repositories.map(({ name, description }) => (
+            <li key={name}>{description}</li>
+          ))}
+        </ul>
       </section>
 
       <footer>
