@@ -65,3 +65,54 @@ footer {
 .social-links a:hover {
     color: #0077cc;
 }
+
+.repo-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);  /* 小さな画面のデフォルトは1列 */
+    gap: 15px;
+}
+
+.repo-tile {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.repo-tile:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.repo-name {
+    font-size: 1.2em;
+    margin-top: 0;
+}
+
+.repo-description {
+    color: #555;
+    margin: 10px 0;
+}
+
+.repo-link {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.repo-link:hover {
+    text-decoration: underline;
+}
+
+/* 中間の画面サイズでのスタイル */
+@media (min-width: 600px) {
+    .repo-container {
+        grid-template-columns: repeat(2, 1fr);  /* 2列 */
+    }
+}
+
+/* 大きな画面サイズでのスタイル */
+@media (min-width: 900px) {
+    .repo-container {
+        grid-template-columns: repeat(3, 1fr);  /* 3列 */
+    }
+}

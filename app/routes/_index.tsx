@@ -52,11 +52,15 @@ export default function Index() {
 
       <section>
         <h1>GitHub</h1>
-        <ul>
-          {repositories.map(({ name, description, url }) => (
-            <li key={name}><Link target="_blank" to={url}>{name} | {description}</Link></li>
-          ))}
-        </ul>
+        <div className="repo-container">
+        {repositories.map(({ name, description, url }) => (
+          <div key={name} className="repo-tile">
+            <h3 className="repo-name">{name}</h3>
+            <p className="repo-description">{description}</p>
+            <Link key={name} to={url} target="_blank">View on GitHub</Link>
+          </div>
+        ))}
+        </div>
       </section>
 
       <footer>
