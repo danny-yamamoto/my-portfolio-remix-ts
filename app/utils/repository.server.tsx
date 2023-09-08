@@ -1,40 +1,49 @@
-type repositories = {
+type Repositories = {
     name: string;
     description: string;
     url: string;
 }
 
-export async function getRepositories() {
-    const res: repositories[] = [
-        {
-            name: 'cosign-tutorial',
-            description: 'A how-to guide for testing cosign on Google Kubernetes Engine.',
-            url: '"https://github.com/danny-yamamoto/cosign-tutorial'
-        }
-    ]
-    console.log(res);
 
-    const queryData = {
-        query: `
-          query {
-            person(personID:5) {
-              name
-              birthYear
-              created
+type InputDataType = {
+  data: {
+      viewer: {
+          repositories: {
+              nodes: Repositories[];
+          }
+      }
+  }
+}
+
+export async function getRepositories(ghEndpoint: string, ghToken: string) {
+  const queryData = {
+      query: `
+      query {
+          viewer {
+            repositories(first: 15, ownerAffiliations: OWNER) {
+              nodes {
+                name
+                description
+                url
+              }
             }
           }
-        `
-    };
-    console.log(queryData);
-    const response = await fetch("https://swapi-graphql.netlify.app/.netlify/functions/index", {
-        body: JSON.stringify(queryData),
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-    });
-    const data = await response.json();
-    console.log(data);
+        }
+      `
+  };
 
-    //return res;
-    return data;
+  // User-Agent can be anything.
+  const response = await fetch(ghEndpoint, {
+      body: JSON.stringify(queryData),
+      headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${ghToken}`,
+          'User-Agent': 'MyCustomUserAgent' 
+      },
+      method: "POST",
+  });
+  const qiitaItems:InputDataType  = await response.json();
+  const repositoriesArray: Repositories[] = qiitaItems.data.viewer.repositories.nodes;
+  return repositoriesArray;
 }
 
