@@ -26,9 +26,10 @@ type CombinedJson = {
 }
 
 export const loader = async ({ context }: LoaderArgs) => {
-  console.log(process.env);
-  //console.log(context.env);
-  const repositories = await getRepositories();
+  const vars: any = context.env;
+  const ghEndpoint: string = vars.GRAPHQL_API;
+  const ghToken: string = vars.GH_TOKEN;
+  const repositories = await getRepositories(ghEndpoint, ghToken);
   const combinedJson = {
     myname: "Daisuke Yamamoto",
     githubProfile: "https://github.com/danny-yamamoto",
@@ -47,9 +48,13 @@ export default function Index() {
         <h1>{data.myname}</h1>
         <Outlet />
         <p>Welcome to my portfolio</p>
+      </section>
+
+      <section>
+        <h1>GitHub</h1>
         <ul>
-          {repositories.map(({ name, description }) => (
-            <li key={name}>{description}</li>
+          {repositories.map(({ name, description, url }) => (
+            <li key={name}><Link target="_blank" to={url}>{name} | {description}</Link></li>
           ))}
         </ul>
       </section>

@@ -15,12 +15,12 @@ type InputDataType = {
   }
 }
 
-export async function getRepositories() {
+export async function getRepositories(ghEndpoint: string, ghToken: string) {
   const queryData = {
       query: `
       query {
           viewer {
-            repositories(first: 20, ownerAffiliations: OWNER) {
+            repositories(first: 15, ownerAffiliations: OWNER) {
               nodes {
                 name
                 description
@@ -32,13 +32,12 @@ export async function getRepositories() {
       `
   };
 
-  const token = "";
   // User-Agent can be anything.
-  const response = await fetch("https://api.github.com/graphql", {
+  const response = await fetch(ghEndpoint, {
       body: JSON.stringify(queryData),
       headers: { 
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${ghToken}`,
           'User-Agent': 'MyCustomUserAgent' 
       },
       method: "POST",
