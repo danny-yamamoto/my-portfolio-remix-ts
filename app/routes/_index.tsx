@@ -60,7 +60,7 @@ export default function Index() {
           <div key={name} className="repo-tile">
             <h3 className="repo-name">{name}</h3>
             <p className="repo-description">{description}</p>
-            <Link key={name} to={url} target="_blank">View on GitHub</Link>
+            <Link key={name} to={url} target="_blank" className="repo-link">View on GitHub</Link>
           </div>
         ))}
         </div>

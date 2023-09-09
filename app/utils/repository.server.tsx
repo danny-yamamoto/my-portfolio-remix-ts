@@ -15,7 +15,14 @@ type InputDataType = {
   }
 }
 
+/**
+ * @name getRepositories
+ * @param ghEndpoint GitHub GraphQL API Endpoint
+ * @param ghToken Personal Token
+ * @returns 
+ */
 export async function getRepositories(ghEndpoint: string, ghToken: string) {
+  // Repositories created by you
   const queryData = {
       query: `
       query {
