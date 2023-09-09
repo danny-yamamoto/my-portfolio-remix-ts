@@ -85,13 +85,16 @@ footer {
 }
 
 .repo-name {
-    font-size: 1.2em;
+    font-size: 1.0em;
     margin-top: 0;
+    line-height: 1;
 }
 
 .repo-description {
     color: #555;
-    margin: 10px 0;
+    margin: 1px 0;
+    line-height: 1;
+    font-size: 0.8em;
 }
 
 .repo-link {

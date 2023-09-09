@@ -22,6 +22,7 @@ export const links = () => {
 type CombinedJson = {
   myname: string;
   githubProfile: string;
+  twitterProfile: string;
   displayRepositories: any[];
 }
 
@@ -33,6 +34,7 @@ export const loader = async ({ context }: LoaderArgs) => {
   const combinedJson = {
     myname: "Daisuke Yamamoto",
     githubProfile: "https://github.com/danny-yamamoto",
+    twitterProfile: "https://twitter.com/dai_s_a_n",
     displayRepositories: repositories
   };
   return json(combinedJson);
@@ -50,8 +52,9 @@ export default function Index() {
         <p>Welcome to my portfolio</p>
       </section>
 
+      {/* GitHub Section */}
       <section>
-        <h1>GitHub</h1>
+        <h1>GitHub Repositories</h1>
         <div className="repo-container">
         {repositories.map(({ name, description, url }) => (
           <div key={name} className="repo-tile">
@@ -67,6 +70,7 @@ export default function Index() {
         <p>&copy; 2023 {data.myname}. All rights reserved.</p>
         <div className="social-links">
           <Link target="_blank" to={data.githubProfile}><i className="fab fa-github"></i></Link>
+          <Link target="_blank" to={data.twitterProfile}><i className="fab fa-twitter"></i></Link>
         </div>
       </footer>
     </div>

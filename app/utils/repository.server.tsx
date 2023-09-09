@@ -20,7 +20,7 @@ export async function getRepositories(ghEndpoint: string, ghToken: string) {
       query: `
       query {
           viewer {
-            repositories(first: 15, ownerAffiliations: OWNER) {
+            repositories(first: 10, ownerAffiliations: OWNER) {
               nodes {
                 name
                 description
