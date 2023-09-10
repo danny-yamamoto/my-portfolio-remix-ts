@@ -7,8 +7,8 @@ import type { LoaderArgs } from "@remix-run/node";
 
 export const meta: V2_MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Daisuke Yamamoto" },
+    { name: "description", content: "danny's portfolio" },
   ];
 };
 
@@ -52,9 +52,9 @@ export default function Index() {
         <p>Welcome to my portfolio</p>
       </section>
 
-      {/* GitHub Section */}
+      {/* Repositories Section */}
       <section>
-        <h1>GitHub Repositories</h1>
+        <h1>Repositories</h1>
         <div className="repo-container">
         {repositories.map(({ name, description, url }) => (
           <div key={name} className="repo-tile">
