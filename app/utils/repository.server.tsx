@@ -5,7 +5,7 @@ type Repositories = {
 }
 
 
-type InputDataType = {
+type Viewer = {
   data: {
       viewer: {
           repositories: {
@@ -49,8 +49,8 @@ export async function getRepositories(ghEndpoint: string, ghToken: string) {
       },
       method: "POST",
   });
-  const qiitaItems:InputDataType  = await response.json();
-  const repositoriesArray: Repositories[] = qiitaItems.data.viewer.repositories.nodes;
-  return repositoriesArray;
+  const viewerData:Viewer  = await response.json();
+  const repositories: Repositories[] = viewerData.data.viewer.repositories.nodes;
+  return repositories;
 }
 
