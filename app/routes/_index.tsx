@@ -7,7 +7,8 @@ import { getCertificates } from "../utils/certificates.server";
 import { json } from "@remix-run/cloudflare"
 import stylesUrl from "../style/index.css"
 import type { LoaderArgs } from "@remix-run/node";
-import { Introduction } from "../utils/Introduction";
+import { Introduction } from "../components/Introduction";
+import { Experience } from "../components/Experience";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -64,17 +65,9 @@ export default function Index() {
       {/* Introduction Section */}
       <Introduction titile="Daisuke Yamamoto" description="Welcome to my portfolio" />
 
-      <Outlet />
-
       {/** Experience Section */}
-      <section>
-        <h2>Experience</h2>
-        <ul>
-        {experience.map(({ id, company, position }) => (
-          <li key={id}>{id}: {position} @ {company}</li>
-        ))}
-        </ul>
-      </section>
+      <Experience titile="Experience" detail={experience} />
+      <Outlet />
 
       {/** Arricles Section */}
       <section  id="articles">
