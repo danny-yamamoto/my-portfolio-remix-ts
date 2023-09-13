@@ -12,7 +12,8 @@
 				"mgmcdermott.vscode-language-babel",
 				"Orta.vscode-jest",
 				"amimaro.remix-run-snippets",
-				"rangav.vscode-thunder-client"
+				"rangav.vscode-thunder-client",
+				"bierner.markdown-mermaid"
 			]
 		}
 	}

@@ -7,6 +7,7 @@ import { getCertificates } from "../utils/certificates.server";
 import { json } from "@remix-run/cloudflare"
 import stylesUrl from "../style/index.css"
 import type { LoaderArgs } from "@remix-run/node";
+import { Introduction } from "../utils/Introduction";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -61,11 +62,9 @@ export default function Index() {
   return (
     <div>
       {/* Introduction Section */}
-      <section id="intro">
-        <h1>{data.myname}</h1>
-        <Outlet />
-        <p>Welcome to my portfolio</p>
-      </section>
+      <Introduction titile="Daisuke Yamamoto" description="Welcome to my portfolio" />
+
+      <Outlet />
 
       {/** Experience Section */}
       <section>
