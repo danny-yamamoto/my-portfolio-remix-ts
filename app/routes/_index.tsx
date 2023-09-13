@@ -3,6 +3,7 @@ import type { V2_MetaFunction } from "@remix-run/cloudflare";
 import { getRepositories } from "../utils/repository.server";
 import { getArticles } from "../utils/articles.server";
 import { getExperience } from "../utils/experience.server"
+import { getCertificates } from "../utils/certificates.server";
 import { json } from "@remix-run/cloudflare"
 import stylesUrl from "../style/index.css"
 import type { LoaderArgs } from "@remix-run/node";
@@ -28,6 +29,7 @@ type CombinedJson = {
   displayExperience: any[];
   displayArticles: any[];
   displayRepositories: any[];
+  displayCertificates: any[];
 }
 
 export const loader = async ({ context }: LoaderArgs) => {
@@ -37,11 +39,13 @@ export const loader = async ({ context }: LoaderArgs) => {
   const experience = await getExperience();
   const articles = await getArticles(20);
   const repositories = await getRepositories(ghEndpoint, ghToken);
+  const certificates = await getCertificates();
   const combinedJson = {
     myname: "Daisuke Yamamoto",
     displayExperience: experience,
     displayArticles: articles,
     displayRepositories: repositories,
+    displayCertificates: certificates,
     githubProfile: "https://github.com/danny-yamamoto",
     twitterProfile: "https://twitter.com/dai_s_a_n",
   };
@@ -53,6 +57,7 @@ export default function Index() {
   const experience = data.displayExperience;
   const repositories = data.displayRepositories;
   const articles = data.displayArticles;
+  const certificates = data.displayCertificates;
   return (
     <div>
       {/* Introduction Section */}
@@ -96,6 +101,16 @@ export default function Index() {
           </div>
         ))}
         </div>
+      </section>
+
+      {/** Certificates Section */}
+      <section>
+        <h2>Certificates</h2>
+        <ul>
+        {certificates.map(({ blockchainId, title }) => (
+          <li key={blockchainId}>{title}</li>
+        ))}
+        </ul>
       </section>
 
       <footer>

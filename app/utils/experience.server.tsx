@@ -4,7 +4,6 @@ type Experience = {
     position: string;
 }
 
-//export async function getArticles(count: number) {
 export async function getExperience() {
     const experience: Experience[] = [
       {
