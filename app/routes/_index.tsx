@@ -1,4 +1,4 @@
-import { useLoaderData, Outlet, Link } from "@remix-run/react"
+import { useLoaderData, Outlet } from "@remix-run/react"
 import type { V2_MetaFunction } from "@remix-run/cloudflare";
 import { getRepositories } from "../utils/repository.server";
 import { getArticles } from "../utils/articles.server";
@@ -9,6 +9,10 @@ import stylesUrl from "../style/index.css"
 import type { LoaderArgs } from "@remix-run/node";
 import { Introduction } from "../components/Introduction";
 import { Experience } from "../components/Experience";
+import { Articles } from "../components/Articles"
+import { Repositories } from "../components/Repositories"
+import { Certificates } from "../components/Certificates"
+import { Footer } from "../components/Footer"
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -70,41 +74,16 @@ export default function Index() {
       <Outlet />
 
       {/** Arricles Section */}
-      <section  id="articles">
-        <h2>Top 20 Article</h2>
-        <ul>
-        {articles.map(({ title, url, id }) => (
-          <li key={id}>
-            <Link key={id} to={url} target="_blank">{title}</Link>
-          </li>
-        ))}
-        </ul>
-      </section>
+      <Articles titile="Top 20 Article" detail={articles}/>
 
       {/* Repositories Section */}
-      <section>
-        <h1>Repositories</h1>
-        <div className="repo-container">
-        {repositories.map(({ name, description, url }) => (
-          <div key={name} className="repo-tile">
-            <h3 className="repo-name">{name}</h3>
-            <p className="repo-description">{description}</p>
-            <Link key={name} to={url} target="_blank" className="repo-link">View on GitHub</Link>
-          </div>
-        ))}
-        </div>
-      </section>
+      <Repositories titile="Repositories" detail={repositories} />
 
       {/** Certificates Section */}
-      <section>
-        <h2>Certificates</h2>
-        <ul>
-        {certificates.map(({ blockchainId, title }) => (
-          <li key={blockchainId}>{title}</li>
-        ))}
-        </ul>
-      </section>
+      <Certificates titile="Certificates" detail={certificates} />
 
+      <Footer titile="Daisuke Yamamoto"/>
+      {/**
       <footer>
         <p>&copy; 2023 {data.myname}. All rights reserved.</p>
         <div className="social-links">
@@ -112,6 +91,7 @@ export default function Index() {
           <Link target="_blank" to={data.twitterProfile}><i className="fab fa-twitter"></i></Link>
         </div>
       </footer>
+       */}
     </div>
   );
 }
