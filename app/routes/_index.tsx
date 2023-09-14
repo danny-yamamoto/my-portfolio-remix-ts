@@ -82,16 +82,8 @@ export default function Index() {
       {/** Certificates Section */}
       <Certificates titile="Certificates" detail={certificates} />
 
-      <Footer titile="Daisuke Yamamoto"/>
-      {/**
-      <footer>
-        <p>&copy; 2023 {data.myname}. All rights reserved.</p>
-        <div className="social-links">
-          <Link target="_blank" to={data.githubProfile}><i className="fab fa-github"></i></Link>
-          <Link target="_blank" to={data.twitterProfile}><i className="fab fa-twitter"></i></Link>
-        </div>
-      </footer>
-       */}
+      <Footer titile="Daisuke Yamamoto" github="https://github.com/danny-yamamoto" twitter="https://twitter.com/dai_s_a_n" />
+
     </div>
   );
 }
