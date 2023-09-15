@@ -60,29 +60,25 @@ export const loader = async ({ context }: LoaderArgs) => {
 
 export default function Index() {
   const data: CombinedJson = useLoaderData();
-  const experience = data.displayExperience;
-  const repositories = data.displayRepositories;
-  const articles = data.displayArticles;
-  const certificates = data.displayCertificates;
   return (
     <div>
       {/* Introduction Section */}
       <Introduction titile="Daisuke Yamamoto" description="Welcome to my portfolio" />
 
       {/** Experience Section */}
-      <Experience titile="Experience" detail={experience} />
+      <Experience titile="Experience" detail={data.displayExperience} />
       <Outlet />
 
       {/** Arricles Section */}
-      <Articles titile="Top 20 Article" detail={articles}/>
+      <Articles titile="Top 20 Article" detail={data.displayArticles}/>
 
       {/* Repositories Section */}
-      <Repositories titile="Repositories" detail={repositories} />
+      <Repositories titile="Repositories" detail={data.displayRepositories} />
 
       {/** Certificates Section */}
-      <Certificates titile="Certificates" detail={certificates} />
+      <Certificates titile="Certificates" detail={data.displayCertificates} />
 
-      <Footer titile="Daisuke Yamamoto" github="https://github.com/danny-yamamoto" twitter="https://twitter.com/dai_s_a_n" />
+      <Footer titile="Daisuke Yamamoto" github={data.githubProfile} twitter={data.twitterProfile} />
 
     </div>
   );
